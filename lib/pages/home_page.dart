@@ -1,20 +1,5 @@
 import 'package:flutter/material.dart';
 
-class ECommerceApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      initialRoute: '/login',
-      routes: {
-        '/login': (context) => LoginPage(),
-        '/home': (context) => HomePage(),
-        '/produk': (context) => ProductDetailPage(),
-      },
-    );
-  }
-}
-
 // Home Page
 class HomePage extends StatefulWidget {
   @override
@@ -27,9 +12,15 @@ class _HomePageState extends State<HomePage> {
 
   final List<Widget> _pages = <Widget>[
     BerandaPage(),
-    Center(child: Text('Promo', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold))),
-    Center(child: Text('Chat', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold))),
-    Center(child: Text('Profil', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold))),
+    Center(
+        child: Text('Promo',
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold))),
+    Center(
+        child: Text('Chat',
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold))),
+    Center(
+        child: Text('Profil',
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold))),
   ];
 
   void _onItemTapped(int index) {
@@ -54,7 +45,8 @@ class _HomePageState extends State<HomePage> {
           IconButton(
             icon: Icon(Icons.shopping_cart, color: Colors.white),
             onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Cart clicked!')));
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(SnackBar(content: Text('Cart clicked!')));
             },
           ),
           // Search Icon Button
@@ -73,7 +65,8 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Beranda'),
-          BottomNavigationBarItem(icon: Icon(Icons.local_offer), label: 'Promo'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.local_offer), label: 'Promo'),
           BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Chat'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profil'),
         ],
@@ -119,8 +112,11 @@ class ProductSearch extends SearchDelegate<String> {
 
   @override
   Widget buildResults(BuildContext context) {
-    final results = products.where((product) => product.name.toLowerCase().contains(query.toLowerCase())).toList();
-    
+    final results = products
+        .where((product) =>
+            product.name.toLowerCase().contains(query.toLowerCase()))
+        .toList();
+
     return ListView(
       children: results.map<Widget>((product) {
         return ListTile(
@@ -136,8 +132,11 @@ class ProductSearch extends SearchDelegate<String> {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    final suggestions = products.where((product) => product.name.toLowerCase().contains(query.toLowerCase())).toList();
-    
+    final suggestions = products
+        .where((product) =>
+            product.name.toLowerCase().contains(query.toLowerCase()))
+        .toList();
+
     return ListView(
       children: suggestions.map<Widget>((product) {
         return ListTile(
@@ -179,14 +178,16 @@ class BerandaPage extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: NetworkImage('https://kioskcokelat.com/cdn/shop/articles/img-1722499003558.jpg?v=1722499043&width=1600'),
+                image: NetworkImage(
+                    'https://kioskcokelat.com/cdn/shop/articles/img-1722499003558.jpg?v=1722499043&width=1600'),
               ),
             ),
           ),
           SizedBox(height: 16),
 
           // Produk dalam Grid
-          Text('Rekomendasi Coklat', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+          Text('Rekomendasi Coklat',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
           SizedBox(height: 10),
           GridView.builder(
             shrinkWrap: true,
@@ -206,7 +207,8 @@ class BerandaPage extends StatelessWidget {
           SizedBox(height: 16),
 
           // Rekomendasi Produk
-          Text('Produk Terbaru', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+          Text('Produk Terbaru',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
           SizedBox(height: 10),
           ListView.builder(
             shrinkWrap: true,
@@ -217,12 +219,14 @@ class BerandaPage extends StatelessWidget {
               return Card(
                 margin: const EdgeInsets.symmetric(vertical: 8),
                 child: ListTile(
-                  leading: Image.network('https://solvent-production.s3.amazonaws.com/media/images/products/2021/06/DSC_0183_copy_jyJktjA.jpg'),
+                  leading: Image.network(
+                      'https://solvent-production.s3.amazonaws.com/media/images/products/2021/06/DSC_0183_copy_jyJktjA.jpg'),
                   title: Text(product.name),
                   subtitle: Text('Harga: Rp ${product.price}'),
                   trailing: Icon(Icons.arrow_forward),
                   onTap: () {
-                    Navigator.pushNamed(context, '/produk', arguments: product.name);
+                    Navigator.pushNamed(context, '/produk',
+                        arguments: product.name);
                   },
                 ),
               );
@@ -255,10 +259,15 @@ class ProductBox extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.network('https://images.tokopedia.net/img/cache/700/VqbcmM/2023/2/21/c40ab1f7-113a-4b89-941a-b75100e4c994.png', height: 100),
+            Image.network(
+                'https://images.tokopedia.net/img/cache/700/VqbcmM/2023/2/21/c40ab1f7-113a-4b89-941a-b75100e4c994.png',
+                height: 100),
             SizedBox(height: 8),
-            Text(product.name, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-            Text('Rp ${product.price}', style: TextStyle(color: const Color.fromARGB(255, 133, 103, 38))),
+            Text(product.name,
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            Text('Rp ${product.price}',
+                style:
+                    TextStyle(color: const Color.fromARGB(255, 133, 103, 38))),
           ],
         ),
       ),
@@ -378,14 +387,13 @@ class LoginPage extends StatelessWidget {
   }
 }
 
-
-
 // Halaman Detail Produk
 class ProductDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Get product details passed via arguments
-    final Map<String, dynamic> productData = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final Map<String, dynamic> productData =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final String productName = productData['name'];
     final String productImage = productData['imageUrl'];
     final String productPrice = productData['price'];
@@ -424,7 +432,10 @@ class ProductDetailPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: Text(
                 productPrice,
-                style: TextStyle(fontSize: 20, color: Colors.green, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.green,
+                    fontWeight: FontWeight.bold),
               ),
             ),
 
