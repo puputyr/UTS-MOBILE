@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/uts.dart';
+
 
 void main() {
-  runApp(const MyApp());
+  runApp(const ECommerceApp());
 }
 
-class MyApp extends StatelessWidget {
+class ECommerceApp extends StatelessWidget {
   const MyApp({super.key});
 
   // This widget is the root of your application.
