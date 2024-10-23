@@ -13,7 +13,7 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> _pages = <Widget>[
     BerandaPage(),
     Center(
-        child: Text('Promo',
+        child: Text('Produk',
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold))),
     Center(
         child: Text('Chat',
@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Beranda'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.local_offer), label: 'Promo'),
+              icon: Icon(Icons.local_offer), label: 'Produk'),
           BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Chat'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profil'),
         ],
