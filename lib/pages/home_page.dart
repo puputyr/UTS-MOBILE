@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profil'),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: const Color.fromARGB(255, 35, 26, 93),
+        selectedItemColor: const Color.fromARGB(255, 74, 55, 191),
         unselectedItemColor: Colors.grey,
         onTap: _onItemTapped,
       ),
@@ -85,46 +85,64 @@ class _ProdukPageState extends State<ProdukPage> {
   // Contoh data produk
   final List<Map<String, dynamic>> produkList = [
     {
-      "nama": "Coklat Premium",
-      "harga": 15000,
+      "nama": "Granola",
+      "harga": 19000,
       "gambar":
-          "https://kioskcokelat.com/cdn/shop/articles/img-1722499003558.jpg?v=1722499043&width=1600",
+          "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2020/12/1/ceedd2cf-600f-4d1f-a86b-829c05c457d1.jpg",
       "bintang": 4.5,
       "terjual": 20,
       "kategori": "terbaru"
     },
     {
-      "nama": "Coklat Premium",
-      "harga": 15000,
+      "nama": "Dark Wonder",
+      "harga": 39000,
       "gambar":
-          "https://kioskcokelat.com/cdn/shop/articles/img-1722499003558.jpg?v=1722499043&width=1600",
+          "https://lilasia.id/storage/bbiwC4wYgd6z1m4aZzcTJxRsCPyKpE5hoMpqT4ce.webp",
       "bintang": 4.5,
       "terjual": 20,
       "kategori": "terbaru"
     },
     {
-      "nama": "Coklat Premium",
+      "nama": "Cadbury",
       "harga": 15000,
       "gambar":
-          "https://kioskcokelat.com/cdn/shop/articles/img-1722499003558.jpg?v=1722499043&width=1600",
+          "https://digitalcontent.api.tesco.com/v2/media/ghs/9a5ee81f-54e3-4cab-806d-f3a81af225a1/24feddf0-1a1c-4f56-9ab3-fe68499686b4_1408738934.jpeg?h=960&w=960",
       "bintang": 4.5,
       "terjual": 20,
       "kategori": "terbaru"
     },
     {
-      "nama": "Coklat Premium",
+      "nama": "Dark Choco",
       "harga": 15000,
       "gambar":
-          "https://kioskcokelat.com/cdn/shop/articles/img-1722499003558.jpg?v=1722499043&width=1600",
+          "https://img.id.my-best.com/product_images/82a862df59ba9739f3e1fb44d3ae6866.jpg?ixlib=rails-4.3.1&q=70&lossless=0&w=800&h=800&fit=clip&s=aad4416dbdce232f6a4dadf36cff8ae0",
       "bintang": 4.5,
       "terjual": 20,
       "kategori": "terbaru"
     },
     {
-      "nama": "Coklat Klasik",
+      "nama": "Dark Choco",
+      "harga": 15000,
+      "gambar":
+          "https://img.id.my-best.com/product_images/82a862df59ba9739f3e1fb44d3ae6866.jpg?ixlib=rails-4.3.1&q=70&lossless=0&w=800&h=800&fit=clip&s=aad4416dbdce232f6a4dadf36cff8ae0",
+      "bintang": 4.5,
+      "terjual": 20,
+      "kategori": "terbaru"
+    },
+       {
+      "nama": "Bournville",
       "harga": 10000,
       "gambar":
-          "https://kioskcokelat.com/cdn/shop/articles/img-1722499003558.jpg?v=1722499043&width=1600",
+          "https://images.tokopedia.net/blog-tokopedia-com/uploads/2019/07/6.-Cadbury-Dark-Chocolate-300x300.jpg",
+      "bintang": 4.0,
+      "terjual": 80,
+      "kategori": "terbaru"
+    },
+    {
+      "nama": "Bournville",
+      "harga": 10000,
+      "gambar":
+          "https://images.tokopedia.net/blog-tokopedia-com/uploads/2019/07/6.-Cadbury-Dark-Chocolate-300x300.jpg",
       "bintang": 4.0,
       "terjual": 80,
       "kategori": "terlaris"
@@ -192,7 +210,7 @@ class _ProdukPageState extends State<ProdukPage> {
               image: const DecorationImage(
                 fit: BoxFit.cover,
                 image: NetworkImage(
-                    'https://kioskcokelat.com/cdn/shop/articles/img-1722499003558.jpg?v=1722499043&width=1600'),
+                    'https://t-2.tstatic.net/pontianak/foto/bank/images/promo-coklat-alfamart-februari-2021-1.jpg'),
               ),
             ),
           ),
@@ -326,7 +344,7 @@ class _ProdukPageState extends State<ProdukPage> {
         label,
         style: TextStyle(
           fontWeight: FontWeight.bold,
-          color: selectedCategory == category ? Color.fromARGB(255, 35, 26, 93) : Colors.black,
+          color: selectedCategory == category ? Color.fromARGB(255, 95, 77, 217) : Colors.black,
         ),
       ),
     );
@@ -341,8 +359,7 @@ class ProductSearch extends SearchDelegate<String> {
   final List<Product> products = [
     Product(name: 'Coklat Matcha', price: 50000),
     Product(name: 'Coklat Cashew', price: 60000),
-    Product(name: 'Silver Queen', price: 40000),
-    Product(name: 'Kit Kat', price: 45000),
+    
   ];
 
   @override
@@ -408,22 +425,31 @@ class ProductSearch extends SearchDelegate<String> {
   }
 }
 
-// BerandaPage, Product, LoginPage
+// BerandaPage, Product, LoginPag
 class BerandaPage extends StatelessWidget {
   final List<Product> products = [
     Product(name: 'Coklat Matcha', price: 50000),
     Product(name: 'Coklat Cashew', price: 60000),
+    Product(name: 'Coklat Matcha', price: 50000),
+    Product(name: 'Coklat Cashew', price: 60000),
   ];
 
-  final TextEditingController controller = TextEditingController(); // Controller for the search field
+  final TextEditingController controller = TextEditingController(); // Controller for search field
 
-   @override
+  @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Greeting Text
+          const Text(
+            'Hi, temukan coklat terlezatmu!',
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 16),
+
           // Dropdown Menu for Chocolate Types
           DropdownButtonFormField<String>(
             decoration: InputDecoration(
@@ -448,97 +474,100 @@ class BerandaPage extends StatelessWidget {
             onChanged: (String? newValue) {
               // Handle the change
             },
-            hint: Text('Pilih Jenis Coklat'),
+            hint: const Text('Pilih Jenis Coklat'),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
 
           // Search Field
           TextFormField(
             controller: controller,
             decoration: InputDecoration(
               hintText: 'Cari produk...',
-              contentPadding: const EdgeInsets.only(left: 10), // Left padding for text
+              contentPadding: const EdgeInsets.only(left: 10),
               filled: true,
-              fillColor: Colors.grey[200], // Background color for the text field
+              fillColor: Colors.grey[200],
               border: const OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(10)),
                 borderSide: BorderSide(
-                  color: Colors.grey, // Outline color
-                  width: 1, // Outline width
+                  color: Colors.grey,
+                  width: 1,
                 ),
               ),
               focusedBorder: const OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(10)),
                 borderSide: BorderSide(
-                  color: Colors.blue, // Color when the field is focused
-                  width: 2, // Outline width when focused
+                  color: Colors.blue,
+                  width: 2,
                 ),
               ),
-              suffixIcon: Padding(
-                padding: const EdgeInsets.only(right: 10), // Padding for the icon
-                child: Icon(Icons.search), // Search icon on the right
+              suffixIcon: const Padding(
+                padding: EdgeInsets.only(right: 10),
+                child: Icon(Icons.search),
               ),
             ),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
 
-          // Banner Promosi in Grid
+          // Banner Promosi with Different Images in Grid
           GridView.builder(
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            physics: const NeverScrollableScrollPhysics(),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               crossAxisSpacing: 10,
-              childAspectRatio: 2, // Adjust the aspect ratio for the banner
+              childAspectRatio: 2,
             ),
-            itemCount: 2, // Two banners
+            itemCount: 2,
             itemBuilder: (context, index) {
+              final List<String> bannerImages = [
+                'https://image.jpnn.com/resize/570x380-80/arsip/normal/2022/02/14/foto-tangkapan-layar-katalog-indomaret-m1yro-x8pk.jpg',
+                'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjvBePluNXLZ0dnLlbXt1igtdyw_chsgmVyLqKmJ1awMqCg_mKpGweJH-nJYDCSLErz_byVovCZOD7juIzSWF8cCiCzHhJWaZ7R_W0CYiYBiOEuCWamN4vkZnKrxK-Kc4MPeB24IGRZ28Hj9e51-mAZ_bQky2cYJXf1DFqBc6f5G2Bvhzws0vPZhz-P/w1200-h630-p-k-no-nu/Promo%20Indomaret%20Tambah%20+Rp.%202.000%20Dapat%202%20PCS%201.jpg',
+              ];
+
               return Container(
                 height: 150,
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 35, 26, 93),
+                  color: const Color.fromARGB(255, 35, 26, 93),
                   borderRadius: BorderRadius.circular(10),
                   image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: NetworkImage(
-                      'https://kioskcokelat.com/cdn/shop/articles/img-1722499003558.jpg?v=1722499043&width=1600',
-                    ),
+                    image: NetworkImage(bannerImages[index]),
                   ),
                 ),
               );
             },
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
 
-          // Produk dalam Grid
-          Text(
+          // Product Recommendations in Grid
+          const Text(
             'Rekomendasi Coklat',
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           GridView.builder(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            itemCount: products.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              childAspectRatio: 0.8, // Adjust for the size of product boxes
-            ),
-            itemBuilder: (context, index) {
-              final product = products[index];
-              return Container(
-                padding: const EdgeInsets.all(4), // Adjust padding for item
-                child: ProductBox(product: product),
-              );
-            },
-          ),
+  shrinkWrap: true,
+  physics: const NeverScrollableScrollPhysics(),
+  itemCount: products.length < 4 ? products.length : 4, // Limit to 4 items for a 2x2 grid
+  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+    crossAxisCount: 2, // 2 columns
+    crossAxisSpacing: 5, // Decreased spacing between columns
+    mainAxisSpacing: 5, // Decreased spacing between rows
+    childAspectRatio: 1, // Aspect ratio can be less than 1 for taller boxes
+  ),
+  itemBuilder: (context, index) {
+    final product = products[index];
+    return Container(
+      padding: const EdgeInsets.all(4),
+      child: ProductBox(product: product),
+    );
+  },
+),
         ],
       ),
     );
   }
-} 
+}
 
 // Widget Kotak Produk
 class ProductBox extends StatelessWidget {
