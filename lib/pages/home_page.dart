@@ -48,12 +48,7 @@ class _HomePageState extends State<HomePage> {
             },
           ),
           // Search Icon Button
-          IconButton(
-            icon: Icon(Icons.search, color: Colors.white),
-            onPressed: () {
-              showSearch(context: context, delegate: ProductSearch());
-            },
-          ),
+          //   
         ],
       ),
       body: AnimatedSwitcher(
@@ -422,28 +417,66 @@ class BerandaPage extends StatelessWidget {
 
   final TextEditingController controller = TextEditingController(); // Controller for the search field
 
-  @override
+   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Dropdown Menu for Chocolate Types
+          DropdownButtonFormField<String>(
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: Colors.grey[200],
+              border: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                borderSide: BorderSide.none,
+              ),
+            ),
+            items: <String>[
+              'Semua Jenis',
+              'Dark Chocolate',
+              'Milk Chocolate',
+              'White Chocolate'
+            ].map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+            onChanged: (String? newValue) {
+              // Handle the change
+            },
+            hint: Text('Pilih Jenis Coklat'),
+          ),
+          SizedBox(height: 16),
+
           // Search Field
           TextFormField(
             controller: controller,
             decoration: InputDecoration(
               hintText: 'Cari produk...',
-              contentPadding: const EdgeInsets.only(left: 40), // Adjusted left padding for space
+              contentPadding: const EdgeInsets.only(left: 10), // Left padding for text
               filled: true,
               fillColor: Colors.grey[200], // Background color for the text field
               border: const OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(10)),
-                borderSide: BorderSide.none, // No border side
+                borderSide: BorderSide(
+                  color: Colors.grey, // Outline color
+                  width: 1, // Outline width
+                ),
               ),
-              prefixIcon: const Padding(
-                padding: EdgeInsets.only(right: 10), // Padding for the icon
-                child: Icon(Icons.search),
+              focusedBorder: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                borderSide: BorderSide(
+                  color: Colors.blue, // Color when the field is focused
+                  width: 2, // Outline width when focused
+                ),
+              ),
+              suffixIcon: Padding(
+                padding: const EdgeInsets.only(right: 10), // Padding for the icon
+                child: Icon(Icons.search), // Search icon on the right
               ),
             ),
           ),
@@ -505,7 +538,7 @@ class BerandaPage extends StatelessWidget {
       ),
     );
   }
-}
+} 
 
 // Widget Kotak Produk
 class ProductBox extends StatelessWidget {
