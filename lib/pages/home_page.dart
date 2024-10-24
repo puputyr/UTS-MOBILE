@@ -76,143 +76,270 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+//produkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+class ProdukPage extends StatefulWidget {
+  const ProdukPage({super.key});
 
-class ProdukPage extends StatelessWidget {
-  const ProdukPage({
-    super.key,
-  });
+  @override
+  State<ProdukPage> createState() => _ProdukPageState();
+}
+
+class _ProdukPageState extends State<ProdukPage> {
+  TextEditingController controller = TextEditingController();
+
+  // Contoh data produk
+  final List<Map<String, dynamic>> produkList = [
+    {
+      "nama": "Coklat Premium",
+      "harga": 15000,
+      "gambar":
+          "https://kioskcokelat.com/cdn/shop/articles/img-1722499003558.jpg?v=1722499043&width=1600",
+      "bintang": 4.5,
+      "terjual": 20,
+      "kategori": "terbaru"
+    },
+    {
+      "nama": "Coklat Premium",
+      "harga": 15000,
+      "gambar":
+          "https://kioskcokelat.com/cdn/shop/articles/img-1722499003558.jpg?v=1722499043&width=1600",
+      "bintang": 4.5,
+      "terjual": 20,
+      "kategori": "terbaru"
+    },
+    {
+      "nama": "Coklat Premium",
+      "harga": 15000,
+      "gambar":
+          "https://kioskcokelat.com/cdn/shop/articles/img-1722499003558.jpg?v=1722499043&width=1600",
+      "bintang": 4.5,
+      "terjual": 20,
+      "kategori": "terbaru"
+    },
+    {
+      "nama": "Coklat Premium",
+      "harga": 15000,
+      "gambar":
+          "https://kioskcokelat.com/cdn/shop/articles/img-1722499003558.jpg?v=1722499043&width=1600",
+      "bintang": 4.5,
+      "terjual": 20,
+      "kategori": "terbaru"
+    },
+    {
+      "nama": "Coklat Klasik",
+      "harga": 10000,
+      "gambar":
+          "https://kioskcokelat.com/cdn/shop/articles/img-1722499003558.jpg?v=1722499043&width=1600",
+      "bintang": 4.0,
+      "terjual": 80,
+      "kategori": "terlaris"
+    },
+    {
+      "nama": "Coklat Dark",
+      "harga": 20000,
+      "gambar":
+          "https://kioskcokelat.com/cdn/shop/articles/img-1722499003558.jpg?v=1722499043&width=1600",
+      "bintang": 4.8,
+      "terjual": 50,
+      "kategori": "terkait"
+    },
+  ];
+
+  // Kategori aktif yang dipilih
+  String selectedCategory = 'terbaru';
+
+  // Fungsi untuk memfilter produk sesuai kategori
+  List<Map<String, dynamic>> get filteredProducts {
+    return produkList
+        .where((produk) => produk['kategori'] == selectedCategory)
+        .toList();
+  }
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController controller = TextEditingController();
-    var size = MediaQuery.of(context).size;
-
-    /*24 is for notification bar on Android*/
-    final double itemHeight = (size.height - kToolbarHeight) / 3;
-    final double itemWidth = size.width / 2;
-
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(
         children: [
+          // TextField Pencarian
           Container(
             decoration: BoxDecoration(
               border: Border.all(color: Colors.grey),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: TextFormField(
-                    controller: controller,
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 10),
-                  child: Icon(Icons.search),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
+  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  children: [
+    Expanded(
+      child: TextFormField(
+        controller: controller,
+        decoration: const InputDecoration(
+          border: InputBorder.none,
+          hintText: 'Cari produk...',
+          contentPadding: EdgeInsets.only(left: 10), // Menambahkan padding kiri
+        ),
+      ),
+    ),
+    const Padding(
+      padding: EdgeInsets.only(right: 10),
+      child: Icon(Icons.search),
+    ),
+  ],
+),),
+
+          const SizedBox(height: 20),
+          // Banner
           Container(
-            height: 150,
+            height: 100,
             decoration: BoxDecoration(
-              color: Color.fromARGB(255, 35, 26, 93),
+              color: const Color.fromARGB(255, 35, 26, 93),
               borderRadius: BorderRadius.circular(10),
-              image: DecorationImage(
+              image: const DecorationImage(
                 fit: BoxFit.cover,
                 image: NetworkImage(
                     'https://kioskcokelat.com/cdn/shop/articles/img-1722499003558.jpg?v=1722499043&width=1600'),
               ),
             ),
           ),
-          const SizedBox(
-            height: 20,
-          ),
+          const SizedBox(height: 20),
+          // Baris Kategori dengan Garis Vertikal
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Text("Terbaru"),
-              Container(
-                height: 30,
-                width: 1,
-                color: Colors.black,
-              ),
-              Text("Terlaris"),
-              Container(
-                height: 30,
-                width: 1,
-                color: Colors.black,
-              ),
-              Text("Terkait"),
-            ],
-          ),
-          const SizedBox(
-            height: 20,
-          ),
+  mainAxisAlignment: MainAxisAlignment.spaceAround,
+  children: [
+    Expanded(
+      child: Center(
+        child: _buildCategoryButton('Terbaru', 'terbaru'),
+      ),
+    ),
+    const SizedBox(
+      height: 20,
+      child: VerticalDivider(
+        color: Colors.black,
+        thickness: 2,
+        width: 10,
+      ),
+    ),
+    Expanded(
+      child: Center(
+        child: _buildCategoryButton('Terlaris', 'terlaris'),
+      ),
+    ),
+    const SizedBox(
+      height: 20,
+      child: VerticalDivider(
+        color: Colors.black,
+        thickness: 2,
+        width: 10,
+      ),
+    ),
+    Expanded(
+      child: Center(
+        child: _buildCategoryButton('Terkait', 'terkait'),
+      ),
+    ),
+  ],
+),
+
+          const SizedBox(height: 20),
+          // Grid Produk
           Expanded(
-            child: GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                childAspectRatio: (itemWidth / itemHeight),
-                crossAxisCount: 3, // number of items in each row
-                mainAxisSpacing: 10.0, // spacing between rows
-                crossAxisSpacing: 10.0, // spacing between columns
-              ),
-              // padding: EdgeInsets.all(8.0), // padding around the grid
-              itemCount: 10, // total number of items
-              itemBuilder: (context, index) {
-                return Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Colors.grey),
-                    // image: DecorationImage(
-                    //   fit: BoxFit.cover,
-                    //   image: NetworkImage(
-                    //       'https://kioskcokelat.com/cdn/shop/articles/img-1722499003558.jpg?v=1722499043&width=1600'),
-                    // ),
-                  ),
-                  child: Column(
-                    children: [
-                      Image.network(
-                        "https://kioskcokelat.com/cdn/shop/articles/img-1722499003558.jpg?v=1722499043&width=1600",
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        "Ckalt kasllaksksask",
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        "Rp. 10.0000",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.red,
-                          fontSize: 12,
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              },
+  child: GridView.builder(
+    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      crossAxisCount: 3,
+      childAspectRatio: 0.6,
+      mainAxisSpacing: 10.0,
+      crossAxisSpacing: 10.0,
+    ),
+    itemCount: filteredProducts.length,
+    itemBuilder: (context, index) {
+      final produk = filteredProducts[index];
+      var boxDecoration = BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: Colors.grey),
+      );
+      return Container(
+        padding: const EdgeInsets.all(8),
+        decoration: boxDecoration,
+        child: Column(
+          children: [
+            Image.network(
+              produk['gambar'],
+              height: 80,
+              fit: BoxFit.cover,
             ),
-          )
+            const SizedBox(height: 5),
+            Text(
+              produk['nama'],
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 5),
+            Text(
+              "Rp. ${produk['harga']}",
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                color: Colors.red,
+                fontSize: 12,
+              ),
+            ),
+            const SizedBox(height: 5),
+            Row(
+              children: [
+                Row(
+                  children: [
+                    const Icon(
+                      Icons.star,
+                      color: Colors.amber,
+                      size: 16,
+                    ),
+                    Text(
+                      produk['bintang'].toString(),
+                      style: const TextStyle(fontSize: 12),
+                    ),
+                  ],
+                ),
+                const Spacer(), // Untuk memberikan jarak antara bintang dan terjual
+                Text(
+                  "${produk['terjual']} Terjual",
+                  style: const TextStyle(
+                    fontSize: 12,
+                    color: Colors.grey,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      );
+    },
+  ),
+),
         ],
       ),
     );
   }
+
+  // Widget untuk tombol kategori
+  Widget _buildCategoryButton(String label, String category) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          selectedCategory = category;
+        });
+      },
+      child: Text(
+        label,
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          color: selectedCategory == category ? Color.fromARGB(255, 35, 26, 93) : Colors.black,
+        ),
+      ),
+    );
+  }
 }
+
+
+
 
 // Product Search Delegate
 class ProductSearch extends SearchDelegate<String> {
@@ -286,17 +413,14 @@ class ProductSearch extends SearchDelegate<String> {
   }
 }
 
-// BerandaPage, Product, LoginPage, and ProductDetailPage classes remain unchanged
+// BerandaPage, Product, LoginPage
 class BerandaPage extends StatelessWidget {
   final List<Product> products = [
     Product(name: 'Coklat Matcha', price: 50000),
     Product(name: 'Coklat Cashew', price: 60000),
   ];
 
-  final List<Product> recommendations = [
-    Product(name: 'Silver Queen', price: 40000),
-    Product(name: 'Kit Kat', price: 45000),
-  ];
+  final TextEditingController controller = TextEditingController(); // Controller for the search field
 
   @override
   Widget build(BuildContext context) {
@@ -305,24 +429,59 @@ class BerandaPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Banner Promosi
-          Container(
-            height: 150,
-            decoration: BoxDecoration(
-              color: Color.fromARGB(255, 35, 26, 93),
-              borderRadius: BorderRadius.circular(10),
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: NetworkImage(
-                    'https://kioskcokelat.com/cdn/shop/articles/img-1722499003558.jpg?v=1722499043&width=1600'),
+          // Search Field
+          TextFormField(
+            controller: controller,
+            decoration: InputDecoration(
+              hintText: 'Cari produk...',
+              contentPadding: const EdgeInsets.only(left: 40), // Adjusted left padding for space
+              filled: true,
+              fillColor: Colors.grey[200], // Background color for the text field
+              border: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                borderSide: BorderSide.none, // No border side
+              ),
+              prefixIcon: const Padding(
+                padding: EdgeInsets.only(right: 10), // Padding for the icon
+                child: Icon(Icons.search),
               ),
             ),
           ),
           SizedBox(height: 16),
 
+          // Banner Promosi in Grid
+          GridView.builder(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 10,
+              childAspectRatio: 2, // Adjust the aspect ratio for the banner
+            ),
+            itemCount: 2, // Two banners
+            itemBuilder: (context, index) {
+              return Container(
+                height: 150,
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 35, 26, 93),
+                  borderRadius: BorderRadius.circular(10),
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: NetworkImage(
+                      'https://kioskcokelat.com/cdn/shop/articles/img-1722499003558.jpg?v=1722499043&width=1600',
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+          SizedBox(height: 16),
+
           // Produk dalam Grid
-          Text('Rekomendasi Coklat',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+          Text(
+            'Rekomendasi Coklat',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
           SizedBox(height: 10),
           GridView.builder(
             shrinkWrap: true,
@@ -332,38 +491,13 @@ class BerandaPage extends StatelessWidget {
               crossAxisCount: 2,
               crossAxisSpacing: 10,
               mainAxisSpacing: 10,
-              childAspectRatio: 1,
+              childAspectRatio: 0.8, // Adjust for the size of product boxes
             ),
             itemBuilder: (context, index) {
               final product = products[index];
-              return ProductBox(product: product);
-            },
-          ),
-          SizedBox(height: 16),
-
-          // Rekomendasi Produk
-          Text('Produk Terbaru',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-          SizedBox(height: 10),
-          ListView.builder(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            itemCount: recommendations.length,
-            itemBuilder: (context, index) {
-              final product = recommendations[index];
-              return Card(
-                margin: const EdgeInsets.symmetric(vertical: 8),
-                child: ListTile(
-                  leading: Image.network(
-                      'https://solvent-production.s3.amazonaws.com/media/images/products/2021/06/DSC_0183_copy_jyJktjA.jpg'),
-                  title: Text(product.name),
-                  subtitle: Text('Harga: Rp ${product.price}'),
-                  trailing: Icon(Icons.arrow_forward),
-                  onTap: () {
-                    Navigator.pushNamed(context, '/produk',
-                        arguments: product.name);
-                  },
-                ),
+              return Container(
+                padding: const EdgeInsets.all(4), // Adjust padding for item
+                child: ProductBox(product: product),
               );
             },
           ),
@@ -422,27 +556,9 @@ class Product {
 class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          // Logo at the top-left corner
-          Positioned(
-            top: 40,
-            left: 16,
-            child: Image.network(
-              'https://st2.depositphotos.com/1588812/7628/v/950/depositphotos_76287645-stock-illustration-vector-logo-with-natural-chocolate.jpg',
-              height: 50,
-            ),
-          ),
-          Center(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
+    var children = [
                   // Welcome text
-                  Text(
+                  const Text(
                     'Selamat datang di dunia penuh keajaiban coklat!',
                     textAlign: TextAlign.left,
                     style: TextStyle(
@@ -451,7 +567,7 @@ class LoginPage extends StatelessWidget {
                       color: Color.fromARGB(255, 35, 26, 93),
                     ),
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
 
                   // Central image with a fallback URL
                   Image.network(
@@ -500,7 +616,24 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                ],
+                ];
+    var children2 = [
+          // Logo at the top-left corner
+          Positioned(
+            top: 40,
+            left: 16,
+            child: Image.network(
+              'https://st2.depositphotos.com/1588812/7628/v/950/depositphotos_76287645-stock-illustration-vector-logo-with-natural-chocolate.jpg',
+              height: 50,
+            ),
+          ),
+          Center(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: children,
               ),
             ),
           ),
@@ -516,94 +649,10 @@ class LoginPage extends StatelessWidget {
               ),
             ),
           ),
-        ],
-      ),
-    );
-  }
-}
-
-// Halaman Detail Produk
-class ProductDetailPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    // Get product details passed via arguments
-    final Map<String, dynamic> productData =
-        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    final String productName = productData['name'];
-    final String productImage = productData['imageUrl'];
-    final String productPrice = productData['price'];
-    final String productDescription = productData['description'];
-    final double productRating = productData['rating'];
-
+        ];
     return Scaffold(
-      appBar: AppBar(title: Text(productName)),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            // Product Image
-            Image.network(productImage),
-
-            // Product Name
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                productName,
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-            ),
-
-            // Product Rating
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.star, color: Colors.amber),
-                SizedBox(width: 4),
-                Text('$productRating', style: TextStyle(fontSize: 16)),
-              ],
-            ),
-
-            // Product Price
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Text(
-                productPrice,
-                style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.green,
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
-
-            // Product Description
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                productDescription,
-                style: TextStyle(fontSize: 16),
-                textAlign: TextAlign.justify,
-              ),
-            ),
-
-            // Action Buttons
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    // Handle add to cart action
-                  },
-                  child: Text('Add to Cart'),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    // Handle purchase action
-                  },
-                  child: Text('Buy Now'),
-                ),
-              ],
-            ),
-          ],
-        ),
+      body: Stack(
+        children: children2,
       ),
     );
   }

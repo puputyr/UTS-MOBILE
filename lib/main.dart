@@ -16,7 +16,7 @@ class ECommerceApp extends StatelessWidget {
       routes: {
         '/login': (context) => LoginPage(),
         '/home': (context) => HomePage(),
-        '/produk': (context) => ProductDetailPage(),
+        
       },
     );
   }
