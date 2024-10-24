@@ -12,9 +12,7 @@ class _HomePageState extends State<HomePage> {
 
   final List<Widget> _pages = <Widget>[
     BerandaPage(),
-    Center(
-        child: Text('Produk',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold))),
+    ProdukPage(),
     Center(
         child: Text('Chat',
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold))),
@@ -74,6 +72,143 @@ class _HomePageState extends State<HomePage> {
         selectedItemColor: const Color.fromARGB(255, 35, 26, 93),
         unselectedItemColor: Colors.grey,
         onTap: _onItemTapped,
+      ),
+    );
+  }
+}
+
+class ProdukPage extends StatelessWidget {
+  const ProdukPage({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    TextEditingController controller = TextEditingController();
+    var size = MediaQuery.of(context).size;
+
+    /*24 is for notification bar on Android*/
+    final double itemHeight = (size.height - kToolbarHeight) / 3;
+    final double itemWidth = size.width / 2;
+
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: TextFormField(
+                    controller: controller,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: Icon(Icons.search),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Container(
+            height: 150,
+            decoration: BoxDecoration(
+              color: Color.fromARGB(255, 35, 26, 93),
+              borderRadius: BorderRadius.circular(10),
+              image: DecorationImage(
+                fit: BoxFit.cover,
+                image: NetworkImage(
+                    'https://kioskcokelat.com/cdn/shop/articles/img-1722499003558.jpg?v=1722499043&width=1600'),
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Text("Terbaru"),
+              Container(
+                height: 30,
+                width: 1,
+                color: Colors.black,
+              ),
+              Text("Terlaris"),
+              Container(
+                height: 30,
+                width: 1,
+                color: Colors.black,
+              ),
+              Text("Terkait"),
+            ],
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Expanded(
+            child: GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                childAspectRatio: (itemWidth / itemHeight),
+                crossAxisCount: 3, // number of items in each row
+                mainAxisSpacing: 10.0, // spacing between rows
+                crossAxisSpacing: 10.0, // spacing between columns
+              ),
+              // padding: EdgeInsets.all(8.0), // padding around the grid
+              itemCount: 10, // total number of items
+              itemBuilder: (context, index) {
+                return Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Colors.grey),
+                    // image: DecorationImage(
+                    //   fit: BoxFit.cover,
+                    //   image: NetworkImage(
+                    //       'https://kioskcokelat.com/cdn/shop/articles/img-1722499003558.jpg?v=1722499043&width=1600'),
+                    // ),
+                  ),
+                  child: Column(
+                    children: [
+                      Image.network(
+                        "https://kioskcokelat.com/cdn/shop/articles/img-1722499003558.jpg?v=1722499043&width=1600",
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        "Ckalt kasllaksksask",
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        "Rp. 10.0000",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.red,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          )
+        ],
       ),
     );
   }
